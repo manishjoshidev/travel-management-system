@@ -950,9 +950,8 @@ This project is proprietary software. All rights reserved.
 
 For issues or questions:
 
-- Email: support@pikndel.com
-- Documentation: [Wiki](./docs)
-- Issue Tracker: GitHub Issues
+- Email: manishjoc108@gmail.com
+  
 
 ---
 
