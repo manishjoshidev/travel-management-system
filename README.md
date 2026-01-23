@@ -1,4 +1,4 @@
-# Pikndel - Logistics Delivery Management System
+# Logistics Delivery Management System
 
 A Spring Boot 3.5.6 REST API application for managing logistics delivery operations with JWT-based authentication, order management, and courier tracking.
 
