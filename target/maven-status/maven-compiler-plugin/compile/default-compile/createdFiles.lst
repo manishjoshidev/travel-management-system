@@ -3,6 +3,7 @@ com\joshi\tmsapplication\config\JWTFilter.class
 com\joshi\tmsapplication\mapper\OrderMapper.class
 com\joshi\tmsapplication\config\SecurityConfig.class
 com\joshi\tmsapplication\service\UserService.class
+com\joshi\tmsapplication\controller\ApplicationGraphQLResolver.class
 com\joshi\tmsapplication\dto\OrderItemDto.class
 com\joshi\tmsapplication\entity\Role.class
 com\joshi\tmsapplication\controller\AddressController.class
@@ -12,6 +13,7 @@ com\joshi\tmsapplication\service\CourierService.class
 com\joshi\tmsapplication\entity\Order.class
 com\joshi\tmsapplication\util\AuthController.class
 com\joshi\tmsapplication\repository\OrderRepository.class
+com\joshi\tmsapplication\controller\GraphQLBootstrapController.class
 com\joshi\tmsapplication\repository\ProductRepository.class
 com\joshi\tmsapplication\entity\Product.class
 com\joshi\tmsapplication\dto\LoginRequest.class
