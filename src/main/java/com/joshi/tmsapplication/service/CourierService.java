@@ -2,7 +2,12 @@
 
 package com.joshi.tmsapplication.service;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import com.joshi.tmsapplication.entity.Courier;
 import com.joshi.tmsapplication.entity.User;
 import com.joshi.tmsapplication.repository.CourierRepository;
@@ -46,4 +51,9 @@ public class CourierService {
     public List<Courier> getAvailableCouriers() {
         return courierRepository.findByStatus("AVAILABLE");
     }
+    public List<Courier> getCouriers(int page, int size) {
+    Page<Courier> courierPage =
+            courierRepository.findAll(PageRequest.of(page, size));
+    return courierPage.getContent();
+}
 }
