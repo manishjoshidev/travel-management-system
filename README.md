@@ -20,7 +20,7 @@ A Spring Boot 3.5.6 REST API application for managing logistics delivery operati
 
 ## Project Overview
 
-**Pikndel** is a comprehensive logistics delivery management system that enables:
+**tms** is a comprehensive logistics delivery management system that enables:
 
 - User registration and authentication with JWT tokens
 - Order creation and tracking
@@ -80,10 +80,10 @@ A Spring Boot 3.5.6 REST API application for managing logistics delivery operati
 ### Project Structure
 
 ```
-Pikndel/
+tms/
 ├── src/
 │   ├── main/
-│   │   ├── java/com/joshi/Pikndel/
+│   │   ├── java/com/joshi/tms/
 │   │   │   ├── config/              # Security & configuration
 │   │   │   │   ├── SecurityConfig.java
 │   │   │   │   ├── JWTFilter.java
@@ -118,7 +118,7 @@ Pikndel/
 │   │   │   │   └── OrderItemDto.java
 │   │   │   ├── mapper/              # Entity mappers
 │   │   │   │   └── OrderMapper.java
-│   │   │   └── PikndelApplication.java
+│   │   │   └── tmsApplication.java
 │   │   └── resources/
 │   │       ├── application.properties
 │   │       ├── data.sql
@@ -442,16 +442,16 @@ Authorization: Bearer <JWT_TOKEN>
 
 ```bash
 git clone <repository-url>
-cd Pikndel
+cd tms
 ```
 
 ### Step 2: Set Up MySQL Database
 
 ```bash
 # Create database
-CREATE DATABASE pikndel_db;
-CREATE USER 'pikndel_user'@'localhost' IDENTIFIED BY 'pikndel_password';
-GRANT ALL PRIVILEGES ON pikndel_db.* TO 'pikndel_user'@'localhost';
+CREATE DATABASE tms_db;
+CREATE USER 'tms_user'@'localhost' IDENTIFIED BY 'tms_password';
+GRANT ALL PRIVILEGES ON tms_db.* TO 'tms_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
@@ -465,9 +465,9 @@ server.port=8080
 server.servlet.context-path=/
 
 # Database Configuration
-spring.datasource.url=jdbc:mysql://localhost:3306/pikndel_db
-spring.datasource.username=pikndel_user
-spring.datasource.password=pikndel_password
+spring.datasource.url=jdbc:mysql://localhost:3306/tms_db
+spring.datasource.username=tms_user
+spring.datasource.password=tms_password
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 # JPA/Hibernate Configuration
@@ -481,7 +481,7 @@ jwt.secret=ThisIsAVerySecureSecretKeyWith256BitsForJWT
 jwt.expiration=86400000
 
 # Application Configuration
-spring.application.name=Pikndel
+spring.application.name=tms
 ```
 
 ### Step 4: Build Project
@@ -496,7 +496,7 @@ mvn clean install
 
 ### Security Configuration
 
-**File**: `src/main/java/com/joshi/Pikndel/config/SecurityConfig.java`
+**File**: `src/main/java/com/joshi/tms/config/SecurityConfig.java`
 
 - **CSRF**: Disabled (stateless API)
 - **CORS**: Enabled with defaults
@@ -506,7 +506,7 @@ mvn clean install
 
 ### JWT Configuration
 
-**File**: `src/main/java/com/joshi/Pikndel/util/JwtUtil.java`
+**File**: `src/main/java/com/joshi/tms/util/JwtUtil.java`
 
 - **Algorithm**: HMAC-SHA512
 - **Key Length**: 256 bits (minimum required)
@@ -638,7 +638,7 @@ CREATE TABLE addresses (
 
 ```bash
 # Using Maven
-cd Pikndel
+cd tms
 mvn spring-boot:run
 
 # Application will start on http://localhost:8080
@@ -651,7 +651,7 @@ mvn spring-boot:run
 mvn clean package
 
 # Run JAR file
-java -jar target/Pikndel-0.0.1-SNAPSHOT.jar
+java -jar target/tms-0.0.1-SNAPSHOT.jar
 ```
 
 ### With Docker Compose
