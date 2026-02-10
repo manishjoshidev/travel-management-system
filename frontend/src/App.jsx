@@ -1,19 +1,17 @@
-import { useState } from "react";
-
+import NavigationBar from "./components/NavigationBar.jsx";
+import Footer from "./components/Footer.jsx";
+import "./App.css";
 
 export default function App() {
-  const [role, setRole] = useState("EMPLOYEE");
-
   return (
-    <div className="container">
+    <div className="main" id="main">
       <div className="header">
-        <span>🚚</span>
-        Transportation Management System
+        <NavigationBar className="navigationbar" />
       </div>
-
-      <Header role={role} setRole={setRole} />
-      <OrdersPage role={role} />
+      <div className="mainBody" id="mainBody"></div>
+      <div className="footer" id="footer">
+        <Footer className="footer" />
+      </div>
     </div>
   );
 }
-
