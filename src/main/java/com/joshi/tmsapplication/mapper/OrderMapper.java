@@ -1,12 +1,11 @@
-
-
 package com.joshi.tmsapplication.mapper;
 
-import java.util.stream.Collectors;
 import com.joshi.tmsapplication.dto.OrderDto;
 import com.joshi.tmsapplication.dto.OrderItemDto;
 import com.joshi.tmsapplication.entity.Order;
 import com.joshi.tmsapplication.entity.OrderItems;
+
+import java.util.stream.Collectors;
 
 public class OrderMapper {
 
@@ -17,7 +16,10 @@ public class OrderMapper {
         dto.setUserId(order.getUser().getId());
         dto.setPickupAddressId(order.getPickupAddress().getId());
         dto.setDeliveryAddressId(order.getDeliveryAddress().getId());
+
+        // ✅ ENUM → ENUM (correct)
         dto.setStatus(order.getStatus());
+
         dto.setAmount(order.getAmount());
         dto.setCreatedAt(order.getCreatedAt());
 
@@ -36,6 +38,7 @@ public class OrderMapper {
         OrderItemDto dto = new OrderItemDto();
         dto.setId(item.getId());
         dto.setProductId(item.getProduct().getProductId());
+        dto.setProductName(item.getProduct().getProductName());
         dto.setQuantity(item.getQuantity());
         dto.setPrice(item.getPrice());
 

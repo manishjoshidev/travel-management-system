@@ -16,30 +16,43 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name="pickup_address_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "pickup_address_id", nullable = false)
     private Addresses pickupAddress;
 
-    @ManyToOne
-    @JoinColumn(name="delivery_address_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "delivery_address_id", nullable = false)
     private Addresses deliveryAddress;
-    
 
-    private String status; // CREATED, ASSIGNED, IN_TRANSIT, DELIVERED, CANCELLED
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderStatus status;
 
+    @Column(nullable = false)
     private BigDecimal amount;
 
+    @Column(nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+        mappedBy = "order",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
     private List<OrderItems> items = new ArrayList<>();
-
 }
+
+
+    
+

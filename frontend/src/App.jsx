@@ -1,22 +1,19 @@
-import "./App.css";
-import Home from "./components/Home";
-import SignUpPage from "./components/signupPage/SignUpPage";
-import { Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 
-function App() {
+
+export default function App() {
+  const [role, setRole] = useState("EMPLOYEE");
+
   return (
-     <>
-    <Link to="/Home" >Home </Link> 
-    <Link to="/SignUpPage" >SignUpPage </Link> 
+    <div className="container">
+      <div className="header">
+        <span>🚚</span>
+        Transportation Management System
+      </div>
 
-
-    <Routes>
-      <Route path="/Home" element={<Home />} />
-      <Route path="/signup" element={<SignUpPage/>} />
-      
-    </Routes>
-    </>
+      <Header role={role} setRole={setRole} />
+      <OrdersPage role={role} />
+    </div>
   );
 }
 
-export default App;

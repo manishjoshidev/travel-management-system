@@ -5,6 +5,8 @@ import com.joshi.tmsapplication.entity.User;
 import com.joshi.tmsapplication.entity.Role;
 import com.joshi.tmsapplication.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -35,7 +38,9 @@ public class UserService implements UserDetailsService {
     }
 
     public Optional<User> getById(Long id) {
+        log.info("Getting user by id: {}", id);
         return userRepository.findById(id);
+
     }
 
     public Optional<User> getByEmail(String email) {

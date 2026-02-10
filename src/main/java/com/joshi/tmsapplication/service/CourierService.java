@@ -44,6 +44,7 @@ public class CourierService {
         return courierRepository.findById(id);
     }
 
+    
     public List<Courier> getAllCouriers() {
         return courierRepository.findAll();
     }

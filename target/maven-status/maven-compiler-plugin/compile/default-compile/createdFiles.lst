@@ -6,12 +6,12 @@ com\joshi\tmsapplication\service\UserService.class
 com\joshi\tmsapplication\dto\OrderItemDto.class
 com\joshi\tmsapplication\entity\Role.class
 com\joshi\tmsapplication\controller\AddressController.class
-com\joshi\tmsapplication\controller\OrderGraphQLResolver.class
 com\joshi\tmsapplication\util\JwtAuthenticationFilter.class
 com\joshi\tmsapplication\entity\OrderItems.class
-com\joshi\tmsapplication\graphql\input\OrderItemInput.class
+com\joshi\tmsapplication\entity\OrderStatus.class
 com\joshi\tmsapplication\service\CourierService.class
 com\joshi\tmsapplication\entity\Order.class
+com\joshi\tmsapplication\Exception\GlobalExceptionHandler.class
 com\joshi\tmsapplication\util\AuthController.class
 com\joshi\tmsapplication\repository\OrderRepository.class
 com\joshi\tmsapplication\repository\ProductRepository.class
@@ -20,7 +20,6 @@ com\joshi\tmsapplication\dto\LoginRequest.class
 com\joshi\tmsapplication\dto\OrderDto.class
 com\joshi\tmsapplication\entity\TrackingEvents.class
 com\joshi\tmsapplication\entity\User$UserBuilder.class
-com\joshi\tmsapplication\graphql\input\CreateOrderInput.class
 com\joshi\tmsapplication\util\JwtUtil.class
 com\joshi\tmsapplication\entity\Addresses.class
 com\joshi\tmsapplication\controller\ProductController.class
@@ -33,12 +32,10 @@ com\joshi\tmsapplication\controller\UserController.class
 com\joshi\tmsapplication\dto\CreateOrderItemDto.class
 com\joshi\tmsapplication\repository\CourierRepository.class
 com\joshi\tmsapplication\controller\OrderController.class
-com\joshi\tmsapplication\graphql\OrderPage.class
 com\joshi\tmsapplication\controller\CourierController.class
 com\joshi\tmsapplication\repository\AddressRepository.class
 com\joshi\tmsapplication\repository\UserRepository.class
 com\joshi\tmsapplication\TmsApplication.class
 com\joshi\tmsapplication\entity\User.class
 com\joshi\tmsapplication\service\OrderService.class
-com\joshi\tmsapplication\controller\CourierGraphQLResolver.class
 com\joshi\tmsapplication\entity\Courier.class

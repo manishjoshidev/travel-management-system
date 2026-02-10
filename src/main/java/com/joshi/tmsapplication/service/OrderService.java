@@ -1,18 +1,18 @@
 package com.joshi.tmsapplication.service;
 
+import com.joshi.tmsapplication.dto.OrderDto;
+import com.joshi.tmsapplication.dto.OrderItemDto;
 import com.joshi.tmsapplication.entity.*;
-import com.joshi.tmsapplication.graphql.input.CreateOrderInput;
-import com.joshi.tmsapplication.graphql.input.OrderItemInput;
-
-import com.joshi.tmsapplication.mapper.OrderMapper; 
-import  com.joshi.tmsapplication.dto.*;
+import com.joshi.tmsapplication.mapper.OrderMapper;
 import com.joshi.tmsapplication.repository.*;
 
-
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+
+@Service
 @RequiredArgsConstructor
 public class OrderService {
 
@@ -22,9 +22,10 @@ public class OrderService {
     private final AddressRepository addressRepository;
 
     /* =====================================================
-       REST: Create Order (USED BY OrderController)
+       REST API: Create Order
        ===================================================== */
-    public OrderDto createOrder(OrderDto dto, Long userId) {
+       @Transactional
+       public OrderDto createOrder(OrderDto dto, Long userId) {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -39,11 +40,12 @@ public class OrderService {
         order.setUser(user);
         order.setPickupAddress(pickup);
         order.setDeliveryAddress(delivery);
-        order.setStatus("CREATED");
+        order.setStatus(OrderStatus.CREATED); // ✅ ENUM
 
-        BigDecimal total = BigDecimal.ZERO;
+        BigDecimal totalAmount = BigDecimal.ZERO;
 
         for (OrderItemDto itemDto : dto.getItems()) {
+
             Product product = productRepository.findById(itemDto.getProductId())
                     .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -56,81 +58,27 @@ public class OrderService {
 
             order.getItems().add(item);
 
-            total = total.add(
+            totalAmount = totalAmount.add(
                     product.getPrice()
-                           .multiply(BigDecimal.valueOf(itemDto.getQuantity()))
+                            .multiply(BigDecimal.valueOf(itemDto.getQuantity()))
             );
         }
 
-        order.setAmount(total);
-        return OrderMapper.toDto(orderRepository.save(order));
+        order.setAmount(totalAmount);
+
+        Order savedOrder = orderRepository.save(order);
+        return OrderMapper.toDto(savedOrder);
     }
 
     /* =====================================================
-       REST: Assign Courier (USED BY OrderController)
+       REST API: Assign Courier
        ===================================================== */
     public OrderDto assignCourier(Long orderId) {
 
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
-        order.setStatus("ASSIGNED");
+        order.setStatus(OrderStatus.ASSIGNED); // ✅ ENUM
         return OrderMapper.toDto(orderRepository.save(order));
-    }
-
-    /* =====================================================
-       GraphQL: Create Order
-       ===================================================== */
-    public Order createOrderFromGraphQL(CreateOrderInput input) {
-
-        User user = userRepository.findById(1L) // POC
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        Addresses pickup = addressRepository.findById(input.getPickupAddressId())
-                .orElseThrow(() -> new RuntimeException("Pickup address not found"));
-
-        Addresses delivery = addressRepository.findById(input.getDeliveryAddressId())
-                .orElseThrow(() -> new RuntimeException("Delivery address not found"));
-
-        Order order = new Order();
-        order.setUser(user);
-        order.setPickupAddress(pickup);
-        order.setDeliveryAddress(delivery);
-        order.setStatus("CREATED");
-
-        BigDecimal total = BigDecimal.ZERO;
-
-        for (OrderItemInput item : input.getItems()) {
-            Product product = productRepository.findById(item.getProductId())
-                    .orElseThrow(() -> new RuntimeException("Product not found"));
-
-            OrderItems oi = new OrderItems();
-            oi.setProduct(product);
-            oi.setQuantity(item.getQuantity());
-            oi.setPrice(product.getPrice());
-            oi.setOrder(order);
-
-            order.getItems().add(oi);
-
-            total = total.add(
-                    product.getPrice()
-                           .multiply(BigDecimal.valueOf(item.getQuantity()))
-            );
-        }
-
-        order.setAmount(total);
-        return orderRepository.save(order);
-    }
-
-    /* =====================================================
-       GraphQL: Assign Courier
-       ===================================================== */
-    public Order assignCourier(Long orderId, Long courierId) {
-
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
-
-        order.setStatus("ASSIGNED");
-        return orderRepository.save(order);
     }
 }

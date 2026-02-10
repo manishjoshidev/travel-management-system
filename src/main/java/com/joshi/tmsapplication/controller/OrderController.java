@@ -2,13 +2,13 @@ package com.joshi.tmsapplication.controller;
 
 
 import com.joshi.tmsapplication.dto.*;
-import com.joshi.tmsapplication.service.OrderService;
+import com.joshi.tmsapplication.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-
+import jakarta.validation.Valid; 
 
 
 
@@ -20,8 +20,9 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping
-    public ResponseEntity<OrderDto> createOrder(
+    @PostMapping("/create")
+    @PreAuthorize("hasRole('USER')" )
+    public ResponseEntity<OrderDto> createOrder(@Valid
             @RequestBody OrderDto dto,
             @RequestParam Long userId
     ) {
