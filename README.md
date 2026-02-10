@@ -893,7 +893,7 @@ server.port=${SERVER_PORT}
 
 - Verify MySQL is running
 - Check database credentials in `application.properties`
-- Ensure database `pikndel_db` exists
+- Ensure database `tms_db` exists
 
 ### Issue: CORS Error
 
@@ -940,11 +940,7 @@ server.port=${SERVER_PORT}
 
 ---
 
-## License
 
-This project is proprietary software. All rights reserved.
-
----
 
 ## Support & Contact
 
@@ -955,11 +951,7 @@ For issues or questions:
 
 ---
 
-## Version History
 
-| Version | Date       | Changes                            |
-| ------- | ---------- | ---------------------------------- |
-| 1.0.0   | 2025-12-16 | Initial release with core features |
 
 ---
 
@@ -968,7 +960,3 @@ For issues or questions:
 **Manish Joshi**  
 Developer & Maintainer
 
----
-
-**Last Updated**: December 16, 2025  
-**Status**: ✅ Production Ready
